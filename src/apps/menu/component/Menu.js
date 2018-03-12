@@ -1,16 +1,21 @@
 import React from 'react'
 import {Menu, Icon} from 'antd'
 
+
 const SubMenu = Menu.SubMenu
 const MenuItemGroup = Menu.ItemGroup
+const MenuItem = Menu.Item
 
 export default class Menus extends React.Component {
   constructor() {
     super()
   }
 
-  handleClick = (e) => {
-    console.log('click ', e);
+  handleClick = (value) => {
+    console.log('click ', value.key)
+    console.log('click ', this.props)
+    this.props.history.push('/notice')
+
   }
   
   render() {
@@ -22,6 +27,12 @@ export default class Menus extends React.Component {
         defaultOpenKeys={['sub1']}
         mode="inline"
       >
+
+        <MenuItem key="description">
+          <Icon type="pie-chart"/>
+          <span>主页</span>
+        </MenuItem>
+
         <SubMenu key="sub1" title={<span><Icon type="mail" /><span>Navigation One</span></span>}>
           <MenuItemGroup key="g1" title="Item 1">
             <Menu.Item key="1">Option 1</Menu.Item>

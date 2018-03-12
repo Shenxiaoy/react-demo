@@ -14,7 +14,7 @@ module.exports = [
 
   //menu
   {
-    title: 'meun',
-    path: path.resolve(htmlPath, 'meun')
+    title: 'menu',
+    path: path.resolve(htmlPath, 'menu')
   },
 ]

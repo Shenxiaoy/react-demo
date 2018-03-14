@@ -43,6 +43,7 @@
   "dependencies": {
     "antd": "^2.13.10",
     "bootstrap": "^3.3.7",
+    "immutability-helper": "^2.6.6",
     "inquirer": "^5.1.0",
     "moment": "^2.20.1",
     "prop-types": "^15.6.1",

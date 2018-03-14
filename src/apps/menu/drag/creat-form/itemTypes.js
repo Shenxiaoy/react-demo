@@ -1,4 +1,5 @@
 export default {
   INPUT: 'input',
-  SELECT: 'select'
+  SELECT: 'select',
+  COMPONENTS: ['input', 'select']
 }

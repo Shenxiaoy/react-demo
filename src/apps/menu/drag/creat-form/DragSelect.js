@@ -1,12 +1,12 @@
 import React from 'react'
-import {Input} from 'antd'
+import {Select} from 'antd'
 import PropTypes from 'prop-types'
 import {DragSource} from 'react-dnd'
 import ItemProps from './itemTypes'
 
 const knightSource = {
-  beginDrag(props, monitor) {
-    return {name: 'shenxiaoyu'}
+  beginDrag() {
+    return {}
   }
 }
 
@@ -18,8 +18,8 @@ function collect(connect, monitor) {
   }
 }
 
-@DragSource(ItemProps.INPUT, knightSource, collect)
-export default class DragInput extends React.Component {
+@DragSource(ItemProps.SELECT, knightSource, collect)
+export default class DragSelect extends React.Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     connectDragPreview: PropTypes.func.isRequired,
@@ -27,7 +27,6 @@ export default class DragInput extends React.Component {
   }
 
   render() {
-
     const { connectDragSource, isDragging } = this.props
     return connectDragSource(
       <div
@@ -36,7 +35,12 @@ export default class DragInput extends React.Component {
           opacity: isDragging ? 0.5 : 1,
         }}
       >
-        <Input style={{width: 200}}/>
+        <Select style={{width: 200}}>
+          <Option value="jack">Jack</Option>
+          <Option value="lucy">Lucy</Option>
+          <Option value="disabled" disabled>Disabled</Option>
+          <Option value="Yiminghe">yiminghe</Option>
+        </Select>
       </div>,
     )
   }

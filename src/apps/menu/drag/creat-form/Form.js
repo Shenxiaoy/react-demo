@@ -24,16 +24,20 @@ export default class Board extends Component {
     )
   }
 
-  renderDragComponent(i, dragType) {
+  renderDragComponent(i, dragType, typePosition) {
     const {componentPosition} = this.props
     for(let j = 0; j < dragType.length; j++) {
       const cur = dragType[j].position
       if(i === cur) {
         let positionInfo = {}
-        positionInfo = componentPosition.inputPosition.find(item=>{
+        positionInfo = componentPosition[typePosition].find(item=>{
           return item.position === i
         })
-        return <DragInput positionInfo={positionInfo} />
+        if(typePosition=='inputPosition') {
+          return <DragInput positionInfo={positionInfo} />
+        } else if(typePosition=='selectPosition') {
+          return <DragSelect positionInfo={positionInfo} />
+        }
         break
       }
     }
@@ -44,26 +48,15 @@ export default class Board extends Component {
     for(let k in componentPosition) {
       switch(k) {
         case 'inputPosition':
-          return this.renderDragComponent(i, componentPosition[k] )
+          return this.renderDragComponent(i, componentPosition[k], 'inputPosition')
+        case 'selectPosition':
+          return this.renderDragComponent(i, componentPosition[k], 'selectPosition')
         default:
           return null
       }
 
-      // if(k == 'inputPosition' && componentPosition[k].length > 0) {
-      //   for(let j = 0; j < componentPosition[k].length; j++) {
-      //     const cur = componentPosition[k][j].position
-      //     if(i === cur) {
-      //       let positionInfo = {}
-      //       positionInfo = componentPosition.inputPosition.find(item=>{
-      //         return item.position === i
-      //       })
-      //       return <DragInput positionInfo={positionInfo} />
-      //       break
-      //     }
-      //   }
-      // }else {
-      //   return null
-      // }
+
+
       // if(componentPosition[k] === i) {
       //   if(k == 'inputPosition') {
       //     return <DragInput/>

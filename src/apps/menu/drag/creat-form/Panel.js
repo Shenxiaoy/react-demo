@@ -13,32 +13,25 @@ const squareTarget = {
     const {position, componentPosition} = props
     const type = monitor.getItemType()
     const positionInfo = monitor.getItem()
-
-    //相同位置插入组件，后者把前者替换掉
-    // for(let k in componentPosition) {
-    //   const name= k.slice(0,-8)
-    //   if(componentPosition[k] === position && name!=type) {
-    //     moveComponent(null, name)
-    //   }
-    // }
-
-console.log(positionInfo,'==========')
-    if(type == 'input') {
-      if(positionInfo.positionInfo!=undefined) {
-        moveComponent(position, 'input', positionInfo.positionInfo.position)
-      } else{
-        moveComponent(position, 'input')
-      }
-
-
-    } else if(type == 'select') {
-      moveComponent(position, 'select')
+    switch (type) {
+      case 'input':
+        refreshPosition(positionInfo, position, 'input')
+      case 'select':
+        refreshPosition(positionInfo, position, 'select')
+      default:
     }
   },
 }
 
-function collect(connect, monitor) {
+function refreshPosition(positionInfo, position, type) {
+  if(positionInfo.positionInfo!=undefined) {
+    moveComponent(position, type, positionInfo.positionInfo.position)
+  } else{
+    moveComponent(position, type)
+  }
+}
 
+function collect(connect, monitor) {
   return {
     connectDropTarget: connect.dropTarget(),
     isOver: monitor.isOver(),

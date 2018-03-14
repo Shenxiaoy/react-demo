@@ -34,6 +34,10 @@ export function observe(o) {
 //   )
 // }
 
+function replaceComponent() {
+
+}
+
 export function moveComponent(i,type,delPosition) {
 
   if(type === 'input') {

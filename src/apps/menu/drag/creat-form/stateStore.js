@@ -1,5 +1,5 @@
 let componentPosition = {
-  inputPosition: null,
+  inputPosition: [],
   selectPosition: null
 }
 let observer = null
@@ -34,10 +34,29 @@ export function observe(o) {
 //   )
 // }
 
-export function moveComponent(i,type) {
+export function moveComponent(i,type,delPosition) {
 
   if(type === 'input') {
-    componentPosition.inputPosition = i
+    let positionInfo = {
+      position: i
+    }
+    if(delPosition!=undefined) {
+      componentPosition.inputPosition.forEach((item, index)=>{
+        if(item.position === delPosition) {
+          componentPosition.inputPosition.splice(index, 1)
+        }
+      })
+      componentPosition.inputPosition.forEach((item, index)=>{
+        if(item.position === i) {
+          componentPosition.inputPosition.splice(index-1, 1)
+        }
+      })
+      componentPosition.inputPosition.push(positionInfo)
+    } else {
+
+      componentPosition.inputPosition.push(positionInfo)
+    }
+
   } else if(type === 'select') {
     componentPosition.selectPosition = i
   }

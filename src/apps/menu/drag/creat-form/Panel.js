@@ -12,17 +12,25 @@ const squareTarget = {
   drop(props, monitor) {
     const {position, componentPosition} = props
     const type = monitor.getItemType()
+    const positionInfo = monitor.getItem()
 
     //相同位置插入组件，后者把前者替换掉
-    for(let k in componentPosition) {
-      const name= k.slice(0,-8)
-      if(componentPosition[k] === position && name!=type) {
-        moveComponent(null, name)
-      }
-    }
+    // for(let k in componentPosition) {
+    //   const name= k.slice(0,-8)
+    //   if(componentPosition[k] === position && name!=type) {
+    //     moveComponent(null, name)
+    //   }
+    // }
 
+console.log(positionInfo,'==========')
     if(type == 'input') {
-      moveComponent(position, 'input')
+      if(positionInfo.positionInfo!=undefined) {
+        moveComponent(position, 'input', positionInfo.positionInfo.position)
+      } else{
+        moveComponent(position, 'input')
+      }
+
+
     } else if(type == 'select') {
       moveComponent(position, 'select')
     }

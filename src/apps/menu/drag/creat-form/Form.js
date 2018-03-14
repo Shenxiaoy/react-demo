@@ -24,20 +24,56 @@ export default class Board extends Component {
     )
   }
 
+  renderDragComponent(i, dragType) {
+    const {componentPosition} = this.props
+    for(let j = 0; j < dragType.length; j++) {
+      const cur = dragType[j].position
+      if(i === cur) {
+        let positionInfo = {}
+        positionInfo = componentPosition.inputPosition.find(item=>{
+          return item.position === i
+        })
+        return <DragInput positionInfo={positionInfo} />
+        break
+      }
+    }
+  }
+
   renderPiece(i) {
     const {componentPosition} = this.props
     for(let k in componentPosition) {
-      if(componentPosition[k] === i) {
-        if(k == 'inputPosition') {
-          return <DragInput/>
-        } else if(k == 'selectPosition') {
-          return <DragSelect/>
-        } else {
+      switch(k) {
+        case 'inputPosition':
+          return this.renderDragComponent(i, componentPosition[k] )
+        default:
           return null
-        }
       }
-    }
 
+      // if(k == 'inputPosition' && componentPosition[k].length > 0) {
+      //   for(let j = 0; j < componentPosition[k].length; j++) {
+      //     const cur = componentPosition[k][j].position
+      //     if(i === cur) {
+      //       let positionInfo = {}
+      //       positionInfo = componentPosition.inputPosition.find(item=>{
+      //         return item.position === i
+      //       })
+      //       return <DragInput positionInfo={positionInfo} />
+      //       break
+      //     }
+      //   }
+      // }else {
+      //   return null
+      // }
+      // if(componentPosition[k] === i) {
+      //   if(k == 'inputPosition') {
+      //     return <DragInput/>
+      //   } else if(k == 'selectPosition') {
+      //     return <DragSelect/>
+      //   } else {
+      //     return null
+      //   }
+      // }
+    }
   }
 
 

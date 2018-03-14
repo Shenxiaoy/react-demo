@@ -6,7 +6,7 @@ import ItemProps from './itemTypes'
 
 const knightSource = {
   beginDrag(props, monitor) {
-    return {name: 'shenxiaoyu'}
+    return {positionInfo: props.positionInfo}
   }
 }
 

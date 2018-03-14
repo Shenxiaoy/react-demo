@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Link} from 'react-router-dom'
 import DragForm from './creat-form'
-import Example from './dustbin/Multiple Targets'
+import Example from './examples/05 Customize/Drop Effects'
 
 export default class Drag extends React.Component {
 

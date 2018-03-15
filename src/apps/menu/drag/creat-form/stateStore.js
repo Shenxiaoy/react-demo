@@ -1,6 +1,6 @@
 let componentPosition = {
   inputPosition: [],
-  selectPosition: null
+  selectPosition: []
 }
 let observer = null
 
@@ -34,35 +34,41 @@ export function observe(o) {
 //   )
 // }
 
-function replaceComponent() {
-
+//清除拖动源初始位置和放置位置
+function replaceComponent(i,type,delPosition, componentTypeName) {
+  let componentType = componentPosition[componentTypeName]
+  let positionInfo = {
+    position: i
+  }
+  if(delPosition!=undefined) {
+    occupyDragPosition(delPosition)
+    occupyDragPosition(i)
+    componentType.push(positionInfo)
+  } else {
+    occupyDragPosition(i)
+    componentType.push(positionInfo)
+  }
 }
-
+function occupyDragPosition(dragPosition) {
+  for(const k in componentPosition) {
+    const typeAry = componentPosition[k]
+    typeAry.forEach((item, index)=>{
+      if(item.position === dragPosition) {
+        typeAry.splice(index, 1)
+      }
+    })
+  }
+}
+//添加拖动源位置标记
 export function moveComponent(i,type,delPosition) {
-
-  if(type === 'input') {
-    let positionInfo = {
-      position: i
-    }
-    if(delPosition!=undefined) {
-      componentPosition.inputPosition.forEach((item, index)=>{
-        if(item.position === delPosition) {
-          componentPosition.inputPosition.splice(index, 1)
-        }
-      })
-      componentPosition.inputPosition.forEach((item, index)=>{
-        if(item.position === i) {
-          componentPosition.inputPosition.splice(index-1, 1)
-        }
-      })
-      componentPosition.inputPosition.push(positionInfo)
-    } else {
-
-      componentPosition.inputPosition.push(positionInfo)
-    }
-
-  } else if(type === 'select') {
-    componentPosition.selectPosition = i
+  switch(type) {
+    case 'input':
+      replaceComponent(i, type, delPosition, 'inputPosition')
+      break
+    case 'select':
+      replaceComponent(i, type, delPosition, 'selectPosition')
+      break
+    default:
   }
   emitChange()
 }

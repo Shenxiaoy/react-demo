@@ -5,8 +5,8 @@ import {DragSource} from 'react-dnd'
 import ItemProps from './itemTypes'
 
 const knightSource = {
-  beginDrag() {
-    return {}
+  beginDrag(props, monitor) {
+    return {positionInfo: props.positionInfo}
   }
 }
 

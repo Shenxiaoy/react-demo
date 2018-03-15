@@ -16,8 +16,10 @@ const squareTarget = {
     switch (type) {
       case 'input':
         refreshPosition(positionInfo, position, 'input')
+        break
       case 'select':
         refreshPosition(positionInfo, position, 'select')
+        break
       default:
     }
   },

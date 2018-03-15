@@ -45,28 +45,29 @@ export default class Board extends Component {
 
   renderPiece(i) {
     const {componentPosition} = this.props
-    for(let k in componentPosition) {
-      switch(k) {
+    const keysAry = Object.keys(componentPosition)
+    return keysAry.map(k=>{
+      switch (k) {
         case 'inputPosition':
           return this.renderDragComponent(i, componentPosition[k], 'inputPosition')
+        break
         case 'selectPosition':
           return this.renderDragComponent(i, componentPosition[k], 'selectPosition')
+        break
         default:
           return null
       }
+    })
 
-
-
-      // if(componentPosition[k] === i) {
-      //   if(k == 'inputPosition') {
-      //     return <DragInput/>
-      //   } else if(k == 'selectPosition') {
-      //     return <DragSelect/>
-      //   } else {
-      //     return null
-      //   }
-      // }
-    }
+    // for(const k in componentPosition) {
+    //   if(k === 'inputPosition') {
+    //     return this.renderDragComponent(i, componentPosition[k], 'inputPosition')
+    //   }
+    //   if(k === 'selectPosition') {
+    //     return this.renderDragComponent(i, componentPosition[k], 'selectPosition')
+    //   }
+    //
+    // }
   }
 
 

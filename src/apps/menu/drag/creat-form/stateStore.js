@@ -58,15 +58,11 @@ export function cardAbled(position) {
 
 //清除拖动源初始位置和放置位置
 function replaceComponent(i,type,startPositionIno, componentTypeName) {
-  let delPosition = startPositionIno ? startPositionIno.position : undefined
-  let name = startPositionIno ? startPositionIno.name : undefined
   let componentType = componentPosition[componentTypeName]
-  let positionInfo = {
-    position: i,
-    name: name
-  }
-  if(delPosition!=undefined) {
-    occupyDragPosition(delPosition)
+  let positionInfo = {position: i}
+  if(startPositionIno!=undefined) {
+    positionInfo = Object.assign( startPositionIno, {position: i})
+    occupyDragPosition(startPositionIno.position)
     occupyDragPosition(i)
     componentType.push(positionInfo)
   } else {

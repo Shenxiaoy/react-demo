@@ -3,6 +3,7 @@ import {Input} from 'antd'
 import PropTypes from 'prop-types'
 import {DragSource} from 'react-dnd'
 import ItemProps from './itemTypes'
+import {cardAbled} from './stateStore'
 
 const knightSource = {
   beginDrag(props, monitor) {
@@ -26,6 +27,13 @@ export default class DragInput extends React.Component {
     isDragging: PropTypes.bool.isRequired,
   }
 
+  onFocus = (e) => {
+    const {positionInfo} = this.props
+    if(positionInfo) {
+      cardAbled(positionInfo.position)
+    }
+  }
+
   render() {
 
     const { connectDragSource, isDragging } = this.props
@@ -36,7 +44,7 @@ export default class DragInput extends React.Component {
           opacity: isDragging ? 0.5 : 1,
         }}
       >
-        <Input style={{width: 200}}/>
+        <Input style={{width: 200}} onFocus={this.onFocus}/>
       </div>,
     )
   }

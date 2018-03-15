@@ -7,7 +7,8 @@ export default class Drag extends React.Component {
 
   render() {
     return <div>
-      <p>creat-form</p>
+      <p style={{fontWeight: 'bold'}}>组件拖拽生成表单</p>
+      <br/>
       <Route path="/drag/form" component={DragForm} />
       <Route path="/drag/example" component={Example} />
     </div>

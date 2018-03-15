@@ -13,6 +13,7 @@ const squareTarget = {
     const {position, componentPosition} = props
     const type = monitor.getItemType()
     const positionInfo = monitor.getItem()
+
     switch (type) {
       case 'input':
         refreshPosition(positionInfo, position, 'input')
@@ -27,7 +28,7 @@ const squareTarget = {
 
 function refreshPosition(positionInfo, position, type) {
   if(positionInfo.positionInfo!=undefined) {
-    moveComponent(position, type, positionInfo.positionInfo.position)
+    moveComponent(position, type, positionInfo.positionInfo)
   } else{
     moveComponent(position, type)
   }

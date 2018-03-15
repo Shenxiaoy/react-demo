@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
+import {Card} from 'antd'
 import PropTypes from 'prop-types'
 import { DragDropContext } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
+import {addInfo} from './stateStore'
 import DragInput from './DragInput'
 import DragSelect from './DragSelect'
 import Panel from './Panel'
+import './styles.less'
 
 @DragDropContext(HTML5Backend)
 export default class Board extends Component {
@@ -15,7 +18,7 @@ export default class Board extends Component {
   renderComponent(i) {
     const {componentPosition} = this.props
     return (
-      <div key="i" style={{width: '100%'}}>
+      <div key={i} style={{width: '100%'}}>
         <Panel position={i} componentPosition={componentPosition}>
           {this.renderPiece(i)}
         </Panel>
@@ -58,38 +61,35 @@ export default class Board extends Component {
           return null
       }
     })
-
-    // for(const k in componentPosition) {
-    //   if(k === 'inputPosition') {
-    //     return this.renderDragComponent(i, componentPosition[k], 'inputPosition')
-    //   }
-    //   if(k === 'selectPosition') {
-    //     return this.renderDragComponent(i, componentPosition[k], 'selectPosition')
-    //   }
-    //
-    // }
   }
-
-
   render() {
+    const {componentPosition, cardVisible} = this.props
+
     const pieces = []
     for (let i = 0; i < 10; i += 1) {
       pieces.push(this.renderComponent(i))
     }
 
-    return <div>
+    return <div className="drag-panels">
       <div><DragInput/><br/><DragSelect/></div>
       <br/>
       <div
         style={{
-          width: 400,
+          width: '50%',
           height: 400,
           border: '1px solid #ccc',
-          marginLeft: 200,
+          marginLeft: 20,
           borderSize: 'border-box',
           padding: '0 1px 0 1px'
         }}>
         {pieces}
+      </div>
+      <div>
+        {
+          cardVisible!==false && <Card title={ addInfo(cardVisible)}>
+
+          </Card>
+        }
       </div>
     </div>
   }

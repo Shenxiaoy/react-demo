@@ -1,11 +1,12 @@
 let componentPosition = {
-  inputPosition: [],
+  inputPosition: [{position: 1, name: '影魔'}, {position: 3, name: '剑圣'}],
   selectPosition: []
 }
+let cardVisible = false
 let observer = null
 
 function emitChange() {
-  observer(componentPosition)
+  observer(componentPosition, cardVisible)
 }
 
 export function observe(o) {
@@ -34,11 +35,35 @@ export function observe(o) {
 //   )
 // }
 
+//拖拽组件绑定的内容
+export function addInfo(position) {
+  let componentName = ''
+  if(position!==false) {
+    for(const k in componentPosition) {
+      const typeAry = componentPosition[k]
+      typeAry.forEach((item, index)=>{
+        if(item.position === position) {
+          componentName = item.name
+        }
+      })
+    }
+    return componentName
+  }
+}
+
+export function cardAbled(position) {
+  cardVisible = position
+  emitChange()
+}
+
 //清除拖动源初始位置和放置位置
-function replaceComponent(i,type,delPosition, componentTypeName) {
+function replaceComponent(i,type,startPositionIno, componentTypeName) {
+  let delPosition = startPositionIno ? startPositionIno.position : undefined
+  let name = startPositionIno ? startPositionIno.name : undefined
   let componentType = componentPosition[componentTypeName]
   let positionInfo = {
-    position: i
+    position: i,
+    name: name
   }
   if(delPosition!=undefined) {
     occupyDragPosition(delPosition)
@@ -60,13 +85,14 @@ function occupyDragPosition(dragPosition) {
   }
 }
 //添加拖动源位置标记
-export function moveComponent(i,type,delPosition) {
+export function moveComponent(i,type,startPositionIno) {
+  console.log(startPositionIno, '--------')
   switch(type) {
     case 'input':
-      replaceComponent(i, type, delPosition, 'inputPosition')
+      replaceComponent(i, type, startPositionIno, 'inputPosition')
       break
     case 'select':
-      replaceComponent(i, type, delPosition, 'selectPosition')
+      replaceComponent(i, type, startPositionIno, 'selectPosition')
       break
     default:
   }

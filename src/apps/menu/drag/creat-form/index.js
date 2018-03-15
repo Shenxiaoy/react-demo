@@ -7,8 +7,8 @@ export default class AddComponent extends React.Component {
     super(props)
     this.unobserve = observe(this.handleChange.bind(this))
   }
-  handleChange(componentPosition) {
-    const nextState = { componentPosition }
+  handleChange(componentPosition, cardVisible) {
+    const nextState = { componentPosition, cardVisible }
     if (this.state) {
       this.setState(nextState)
     } else {
@@ -22,10 +22,10 @@ export default class AddComponent extends React.Component {
 
 
   render() {
-    const { componentPosition } = this.state
+    const { componentPosition, cardVisible } = this.state
 
     return <div>
-      <Form componentPosition={componentPosition}/>
+      <Form componentPosition={componentPosition} cardVisible={cardVisible}/>
     </div>
   }
 }

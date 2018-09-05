@@ -29,17 +29,17 @@ export default class Siders extends React.Component {
             <Menu.Item key="3">nav 3</Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ padding: '0 50px' }}>
+        <Content style={{ padding: '0 20px' }}>
           <Breadcrumb style={{ margin: '16px 0' }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
             <Breadcrumb.Item>List</Breadcrumb.Item>
             <Breadcrumb.Item>App</Breadcrumb.Item>
           </Breadcrumb>
-          <Layout style={{ padding: '5px 5px 0px 0px', background: '#fff', minHeight: '100vh' }}>
+          <Layout style={{ padding: '0px 5px 0px 0px', background: '#fff', minHeight: '100vh' }}>
             <LeftSider />
 
-            <Layout style={{ padding: '10px 10px 0px 10px'}}>
-              <Content style={{ background: '#fff'}}>
+            <Layout >
+              <Content style={{padding: '25px', background: '#fff'}}>
                 <div>{this.props.children}</div>
               </Content>
             </Layout>

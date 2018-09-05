@@ -1,27 +1,29 @@
 import React from 'react'
 import {render} from 'react-dom'
+import {Switch, BrowserRouter, Route, Link, HashRouter, Redirect} from 'react-router-dom'
 import {Table, Menu, Row, Col, message, Button} from 'antd'
-import Head from './header/Head'
+import App from '../common/App'
+import Drag from './drag'
+import Nav from './nav'
 
 class Manage extends React.Component {
   constructor() {
     super()
     this.state = {
-      num: 1
+
     }
   }
-  onClick = () => {
-    this.setState({num: this.state.num + 1})
-  }
+
   render() {
     return <div>
-      ok-666 <Button onClick={this.onClick} type="primary">点击</Button>
-      <span>{this.state.num}</span>
-      <div>
-        {
-          this.state.num % 2 &&  <Head num={this.state.num}/>
-        }
-      </div>
+      <App>
+        <HashRouter>
+          <div>
+            <Route exact path="/" component={Nav}/>
+            <Route path="/drag" component={Drag}/>
+          </div>
+        </HashRouter>
+      </App>
     </div>
   }
 }
